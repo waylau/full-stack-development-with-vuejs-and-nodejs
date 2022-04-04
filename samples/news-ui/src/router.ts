@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import NewsList from "./components/NewsList.vue";
-import NewsDetail from "./components/NewsDetail.vue";
+import Admin from "./components/Admin.vue";
 
 const routes: Array<any> = [
     {
@@ -16,7 +16,13 @@ const routes: Array<any> = [
         component: () =>
             import("./components/NewsDetail.vue"),
     },
-
+    {
+        path: "/admin",
+        name: "Admin",
+        // 当访问路由时，它是懒加载的
+        component: () =>
+            import("./components/Admin.vue"),// 后台管理
+    },
 ];
 
 const router = createRouter({
