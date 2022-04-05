@@ -20,13 +20,22 @@ app.get('/admins/hi', (req, res) => {
     var credentials = auth(req)
 
     // 登录认证检验
-    if (!credentials || !check(credentials.name, credentials.pass)) {
-        res.statusCode = 401
-        res.setHeader('WWW-Authenticate', 'Basic realm="example"')
-        res.end('Access denied')
-    }
+    if (!credentials) {
+        res.statusCode = 401;
+        res.setHeader('WWW-Authenticate', 'Basic realm="example"');
+        res.end('Access denied');
+    } else {
+        check(credentials.name, credentials.pass, function (valid) {
+            if (valid) {
+                res.send('hello');
+            } else {
+                res.statusCode = 401;
+                res.setHeader('WWW-Authenticate', 'Basic realm="example"');
+                res.end('Access denied');
+            }
 
-    res.send('hello')
+        })
+    }
 });
 
 // 创建新闻
@@ -35,33 +44,43 @@ app.post('/admins/news', (req, res) => {
     var credentials = auth(req)
 
     // 登录认证检验
-    if (!credentials || !check(credentials.name, credentials.pass)) {
-        res.statusCode = 401
-        res.setHeader('WWW-Authenticate', 'Basic realm="example"')
-        res.end('Access denied')
+    if (!credentials) {
+        res.statusCode = 401;
+        res.setHeader('WWW-Authenticate', 'Basic realm="example"');
+        res.end('Access denied');
+    } else {
+        check(credentials.name, credentials.pass, function (valid) {
+            if (valid) {
+
+                let news = req.body;
+                console.info(news);
+
+                // 使用连接方法来连接到服务器
+                client.connect(function (err) {
+                    if (err) {
+                        console.error('error end: ' + err.stack);
+                        return;
+                    }
+
+                    console.log("成功连接到服务器");
+
+                    const db = client.db(dbName);
+
+                    // 插入文档
+                    insertNews(db, news, function () {
+                    });
+                });
+
+                // 响应成功
+                res.status(200).end();
+            } else {
+                res.statusCode = 401;
+                res.setHeader('WWW-Authenticate', 'Basic realm="example"');
+                res.end('Access denied');
+            }
+
+        })
     }
-
-    let news = req.body;
-    console.info(news);
-
-    // 使用连接方法来连接到服务器
-    client.connect(function (err) {
-        if (err) {
-            console.error('error end: ' + err.stack);
-            return;
-        }
-
-        console.log("成功连接到服务器");
-
-        const db = client.db(dbName);
-
-        // 插入新闻
-        insertNews(db, news, function () {
-        });
-    });
-
-    // 响应成功
-    res.status(200).end();
 });
 
 
@@ -85,14 +104,34 @@ const insertNews = function (db, _news, callback) {
 }
 
 // 检查权限
-const check = function (name, pass) {
+const check = function (name, pass, callback) {
     var valid = false;
 
-    // 判读账号密码是否匹配
-    if (('waylau' === name) && ('123456' === pass)) {
-        valid = true;
-    }
-    return valid
+    // 使用连接方法来连接到服务器
+    client.connect(function (err) {
+        if (err) {
+            console.error('error end: ' + err.stack);
+            return valid;
+        }
+
+        console.log("成功连接到服务器");
+
+        const db = client.db(dbName);
+
+        // 判断账号密码是否匹配
+        findUser(db, name, function (result) {
+            // 响应成功
+            if ((result.username === name) && (result.password === pass)) {
+                valid = true;
+                console.log("验证通过");
+                callback(valid);
+            } else {
+                valid = false;
+                console.log("验证失败");
+                callback(valid);
+            }
+        });
+    });
 }
 
 // 查询新闻列表
@@ -128,6 +167,70 @@ const findNewsList = function (db, callback) {
     news.find({}).toArray(function (err, result) {
         console.log("查询所有文档，结果如下：");
         console.log(result)
+        callback(result);
+    });
+}
+
+const ObjectId = require('mongodb').ObjectId;
+
+// 根据id查询新闻信息
+app.get('/news/:newsId', (req, res) => {
+
+    let newsId = req.params.newsId;
+    console.log("newsId为" + newsId);
+
+    // 使用连接方法来连接到服务器
+    client.connect(function (err) {
+        if (err) {
+            console.error('error end: ' + err.stack);
+            return;
+        }
+
+        console.log("成功连接到服务器");
+
+        const db = client.db(dbName);
+
+        // 查询新闻
+        findNews(db, newsId, function (result) {
+            // 响应成功
+            res.status(200).json(result);
+        });
+    });
+
+});
+
+// 查询指定新闻
+const findNews = function (db, newsId, callback) {
+    // 获取集合
+    const news = db.collection('news');
+
+    // 查询指定文档
+    news.findOne({_id: ObjectId(newsId)},function (err, result) {
+        if (err) {
+            console.error('error end: ' + err.stack);
+            return;
+        }
+        
+        console.log("查询指定文档，响应结果是：");
+        console.log(result);
+        callback(result);
+    });
+}
+
+// 查询指定用户
+const findUser = function (db, name, callback) {
+    // 获取集合
+    const user = db.collection('user');
+
+    // 查询指定文档
+    user.findOne({ username: name }, function (err, result) {
+        if (err) {
+            console.error('error end: ' + err.stack);
+            return;
+        }
+
+        console.log("查询指定文档，响应结果是：");
+        console.log(result);
         callback(result);
     });
 }
