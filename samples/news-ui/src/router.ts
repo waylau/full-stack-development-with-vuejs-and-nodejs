@@ -1,7 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import NewsList from "./components/NewsList.vue";
-import Admin from "./components/Admin.vue";
 
 const routes: Array<any> = [
     {

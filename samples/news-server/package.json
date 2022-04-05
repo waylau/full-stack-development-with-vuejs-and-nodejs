@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "basic-auth": "^2.0.1",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "mongodb": "^4.5.0"
   }
 }
