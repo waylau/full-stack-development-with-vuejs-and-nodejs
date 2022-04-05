@@ -7,13 +7,13 @@ app.use(bodyParser.json()) // 用于解析 application/json
 const MongoClient = require('mongodb').MongoClient;
 
 // 连接URL
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb://127.0.0.1:27017';
 
 // 数据库名称
-const dbName = 'meanNews';
+const dbName = 'nodejsBook';
 
 // 创建MongoClient客户端
-const client = new MongoClient(url,{ useNewUrlParser: true, useUnifiedTopology: true});
+const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.get('/admins/hi', (req, res) => {
 
@@ -43,7 +43,7 @@ app.post('/admins/news', (req, res) => {
 
     let news = req.body;
     console.info(news);
-    
+
     // 使用连接方法来连接到服务器
     client.connect(function (err) {
         if (err) {
@@ -71,14 +71,16 @@ const insertNews = function (db, _news, callback) {
     const news = db.collection('news');
 
     // 插入文档
-    news.insertOne({ title: _news.title, content: _news.content, creation: _news.creation}, function (err, result) {
-            if (err) {
-                console.error('error end: ' + err.stack);
-                return;
-            }
+    news.insertOne({
+        title: _news.title, content: _news.content, creation: _news.creation
+    })
+        .then(function (result) {
             console.log("已经插入文档，响应结果是：");
             console.log(result);
-            callback(result);
+        })
+        .catch(function (error) {
+            console.log(error);
+            console.log("插入失败");
         });
 }
 
@@ -91,6 +93,43 @@ const check = function (name, pass) {
         valid = true;
     }
     return valid
+}
+
+// 查询新闻列表
+app.get('/news', (req, res) => {
+
+    // 使用连接方法来连接到服务器
+    client.connect(function (err) {
+        if (err) {
+            console.error('error end: ' + err.stack);
+            return;
+        }
+
+        console.log("成功连接到服务器");
+
+        const db = client.db(dbName);
+
+        // 插入新闻
+        findNewsList(db, function (result) {
+            // 响应成功
+            res.status(200).json(result);
+        });
+    });
+
+});
+
+
+// 查找全部新闻标题
+const findNewsList = function (db, callback) {
+    // 获取集合
+    const news = db.collection('news');
+
+    // 查询文档
+    news.find({}).toArray(function (err, result) {
+        console.log("查询所有文档，结果如下：");
+        console.log(result)
+        callback(result);
+    });
 }
 
 app.listen(port, () => console.log(`Server listening on port ${port}!`));

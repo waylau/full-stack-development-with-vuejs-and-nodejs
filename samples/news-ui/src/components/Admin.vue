@@ -1,5 +1,5 @@
 <template>
-  <input type="text" placeholder="输入标题" />
+  <input v-model="markdownTitle" type="text" placeholder="输入标题" />
 
   <md-editor v-model="markdownContent" @onSave="submitData" />
 </template>
@@ -52,7 +52,7 @@ export default class Admin extends Vue {
     axios
       .post(
         this.createNewsUrl,
-        new News(0, this.markdownTitle, this.markdownContent, new Date())
+        new News(this.markdownTitle, this.markdownContent, new Date())
       )
       .then(function (response) {
         console.log(response);
