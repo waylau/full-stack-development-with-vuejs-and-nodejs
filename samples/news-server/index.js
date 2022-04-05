@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-const port = 8089; // 指定端口号
+const process = require('process');
+const port = process.argv[2] || 8089;
 const auth = require('basic-auth');
 const bodyParser = require('body-parser');
 app.use(bodyParser.json()) // 用于解析 application/json
