@@ -1,4 +1,4 @@
-# Full Stack Development With Vue.js And Node.js. （Vue.js+Node.js全栈开发）源码
+# Full Stack Development With Vue.js And Node.js. 《Node.js+Express+MongoDB+Vue.js全栈开发实战》源码
 
 * [hello-world](samples/node-samples/hello-world)：第一个Node.js应用
 * [assert-strict](samples/node-samples/assert-strict)：deepStrictEqual示例
@@ -93,14 +93,14 @@
 
 
 
-## 配套书籍《Node.js企业级应用开发实战》
+## 配套书籍《Node.js+Express+MongoDB+Vue.js全栈开发实战》
 
-与该源码配套的书籍《Node.js企业级应用开发实战》已经出版，内容详见全书[目录](SUMMARY.md)。
+与该源码配套的书籍《Node.js+Express+MongoDB+Vue.js全栈开发实战》已经出版。
 
 ![](images/nodejs.jpg)
 
 
-本书如有勘误，会在<https://github.com/waylau/nodejs-book-samples/issues>上进行发布。由于笔者能力有限，时间仓促，难免错漏，欢迎读者批评指正。
+本书如有勘误，会在<https://github.com/waylau/full-stack-development-with-vuejs-and-nodejs/issues>上进行发布。由于笔者能力有限，时间仓促，难免错漏，欢迎读者批评指正。
 
 您也可以上[豆瓣](https://book.douban.com/subject/35148345/)给老卫打Call。
 
