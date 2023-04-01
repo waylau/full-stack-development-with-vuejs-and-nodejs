@@ -1,4 +1,4 @@
-# Full Stack Development With Vue.js And Node.js. 《Node.js+Express+MongoDB+Vue.js全栈开发实战》源码
+# Full Stack Development With Vue.js And Node.js. 《Node.js＋Express+MongoDB＋Vue.js全栈开发实战》源码
 
 * [hello-world](samples/node-samples/hello-world)：第一个Node.js应用
 * [assert-strict](samples/node-samples/assert-strict)：deepStrictEqual示例
@@ -93,9 +93,9 @@
 
 
 
-## 配套书籍《Node.js+Express+MongoDB+Vue.js全栈开发实战》
+## 配套书籍《Node.js＋Express+MongoDB＋Vue.js全栈开发实战》
 
-与该源码配套的书籍《Node.js+Express+MongoDB+Vue.js全栈开发实战》已经出版。
+与该源码配套的书籍《Node.js＋Express+MongoDB＋Vue.js全栈开发实战》已经出版。
 
 ![](images/nodejs.jpg)
 
@@ -109,10 +109,10 @@
 
 实体店及各大网店有售。据我所知有如下网站供应：
 
-* [京东](https://search.jd.com/Search?keyword=%E6%9F%B3%E4%BC%9F%E5%8D%AB%20Node.js%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98&enc=utf-8&wq=%E6%9F%B3%E4%BC%9F%E5%8D%AB%20Node.js%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98&pvid=cef388426fa443baac6fb59a1a133421)
-* [1号店](https://search.yhd.com/c0-0/k%25E6%259F%25B3%25E4%25BC%259F%25E5%258D%25AB%2520Node.js%25E4%25BC%2581%25E4%25B8%259A%25E7%25BA%25A7%25E5%25BA%2594%25E7%2594%25A8%25E5%25BC%2580%25E5%258F%2591%25E5%25AE%259E%25E6%2588%2598/)
-* [淘宝](https://s.taobao.com/search?q=%E6%9F%B3%E4%BC%9F%E5%8D%AB+Node.js%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20200729&ie=utf8)
-* [当当](http://search.dangdang.com/?key=%C1%F8%CE%B0%CE%C0%20Node.js%C6%F3%D2%B5%BC%B6%D3%A6%D3%C3%BF%AA%B7%A2%CA%B5%D5%BD&act=input)
+* [京东](https://search.jd.com/Search?keyword=Node.js%EF%BC%8BExpress%2BMongoDB%EF%BC%8BVue.js%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98&enc=utf-8&wq=&pvid=8046b5d561b0455ca8057286ebe69eeb)
+* [当当](http://search.dangdang.com/?key=Node.js%A3%ABExpress%2BMongoDB%A3%ABVue.js%C8%AB%D5%BB%BF%AA%B7%A2%CA%B5%D5%BD&act=input)
+* [淘宝](https://s.taobao.com/search?q=Node.js%2BExpress%2BMongoDB%2BVue.js%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98&commend=all&ssid=s5-e&search_type=item&sourceId=tb.index&spm=a21bo.jianhua.201856-taobao-item.2&ie=utf8&initiative_id=tbindexz_20170306)
+
 
 
 想低于市价得到本书？来[二手书集市](https://github.com/waylau/second-hand-books)试试看。
